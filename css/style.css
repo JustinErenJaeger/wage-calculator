@@ -1,6 +1,14 @@
 /* THE STYLES FOR THE CALCULATOR */
 p {
-  color: #5f5f5f;
+  color: #747474;
+}
+
+input {
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: rgb(250, 250, 250);
 }
 
 .calculator .icon-holder i,
@@ -10,26 +18,26 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transition: all 0.2s ease-in-out;
 }
 
 .calculator {
   position: relative;
-  padding: 2rem;
-  margin: 5rem auto 0 auto;
+  padding: 1rem 3rem 3rem 3rem;
+  margin: 4rem auto 0 auto;
   border-radius: 0.5rem;
   height: auto;
   width: 50%;
   font-family: Arial, Helvetica, sans-serif;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.089);
+  background: white;
 }
 
 /* THE STYLES FOR THE TITLE */
 .calculator .calc-title {
+  float: right;
+  font-size: 2rem;
   z-index: 6;
-  position: absolute;
-  right: 2rem;
-  top: 1.2rem;
+  margin-bottom: 3rem;
 }
 
 .calculator .calc-title span:nth-child(1) {
@@ -69,11 +77,11 @@ p {
 .calculator .input-field-holder {
   position: relative;
   z-index: 4;
-  margin-top: 1rem;
+  margin-top: 1.4rem;
   width: 16rem;
   height: auto;
   display: grid;
-  grid-template-columns: 3rem auto 2rem;
+  grid-template-columns: 2rem 12rem 2rem;
   background: rgb(255, 255, 255);
 }
 
@@ -81,35 +89,62 @@ p {
 .calculator .input-field-holder .input-field,
 .calculator .input-field-holder .indicator {
   position: relative;
-  height: 2.4rem;
-  width: auto;
+  height: 2.2rem;
+  width: 100%;
 }
 
-.calculator .input-field-holder .input-field {
-  margin: 0;
-  padding: 0;
-  border-bottom-left-radius: 0.2rem;
-  border-top-left-radius: 0.2rem;
-  border: none;
-  background: rgb(248, 248, 248);
-  outline: none;
+.calculator .input-field-holder .input-field input {
+  width: calc(100% - 1rem);
+  height: 100%;
 }
 
-.calculator .input-field-holder .input-field::-webkit-inner-spin-button,
-.calculator .input-field-holder .input-field::-webkit-outer-spin-button {
+.floating-label {
+  position: absolute;
+  pointer-events: none;
+  color: #838383;
+  font-size: 0.8rem;
+  bottom: calc(50% - 0.5rem);
+  height: 0.9rem;
+  left: 1rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.calculator .input-field-holder .input-field input:focus + span,
+.calculator .input-field-holder .input-field input:active + span,
+.active-label {
+  font-size: 0.8rem;
+  height: 1rem;
+  bottom: 104%;
+  left: 0;
+  color: #747474;
+}
+
+.empty-field-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0.4rem;
+  background: red;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  transition: all 0.3s ease-in-out;
+}
+
+.calculator .input-field-holder .input-field input::-webkit-inner-spin-button,
+.calculator .input-field-holder .input-field input::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
-.calculator .input-field-holder .input-field[type="number"] {
-  font-size: 1rem;
+.calculator .input-field-holder .input-field input[type="number"] {
+  font-size: 0.8rem;
   text-align: right;
   padding-right: 1rem;
   color: #5f5f5f;
 }
 
-.calculator .input-field-holder .input-field::placeholder {
+.calculator .input-field-holder .input-field input::placeholder {
   padding-left: 1rem;
   text-align: left;
+  font-size: 0.8rem;
 }
 
 .calculator .input-field-holder .indicator {
@@ -123,49 +158,86 @@ p {
 }
 
 /* THE GENERATED VALUES STYLES */
+
+.display-2,
+.display-3 {
+  height: 0;
+  overflow: hidden;
+  transition: all 0.5s ease-in-out;
+}
+
+.display-2 {
+  margin-top: 2rem;
+}
+
 .calculator .calculation-grid {
   position: relative;
+  margin-top: 1rem;
+  margin-bottom: 0;
   z-index: 6;
-  width: 64%;
+  width: 100%;
   height: auto;
   display: grid;
-  grid-template-columns: 3rem auto auto;
+  grid-template-columns: 2rem auto 4rem;
   background: rgb(255, 255, 255);
 }
 
-.calculator .icon-holder i:hover {
-  font-size: 1.2rem;
-  color: #5f5f5f;
+.calculator .calculation-grid.devider {
+  margin-top: 4rem;
 }
 
-.calculator .calculation-grid.devider {
-  margin-top: 3rem;
+.calculator .calculation-grid .description {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.calculator .calculation-grid .impfacDesc {
+  margin-top: 0.7rem;
+}
+
+.calculator .calculation-grid .value-holder {
+  position: relative;
 }
 
 .calculator .calculation-grid .icon-holder {
   position: relative;
+  transition: all 0.1s ease-in-out !important;
 }
 
 .calculator .icon-holder i {
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .calculator .icon-holder i:hover {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: #5f5f5f;
 }
 
 .calculator .calculation-grid .calc-values {
+  color: white;
+  font-size: 0.8rem;
   position: relative;
   text-align: right;
   float: right;
-  /* padding: 0 1rem; */
+  margin: 0;
 }
 
+#impFactorPerc {
+  color: #5f5f5f;
+  float: right;
+  width: 4rem;
+  text-align: center;
+  height: 2.2rem;
+}
+
+#impFactorPerc::-webkit-inner-spin-button,
+#impFactorPerc::-webkit-outer-spin-button {
+  height: 2rem;
+}
 .calculator .calculation-grid .calc-values::before {
   content: "";
   position: absolute;
-  height: 1px;
+  height: 0.5px;
   width: 115%;
   background: #bebebe;
   bottom: -3px;
@@ -173,20 +245,93 @@ p {
 }
 
 .info-box {
-  border-radius: 0.4rem;
+  bottom: 0;
   position: relative;
   z-index: 1;
   width: auto;
-  padding: 1rem;
-  font-size: 0.9rem;
+  padding: 0;
+  font-size: 0.8rem;
   opacity: 0;
-  margin: -3rem 0 0.4rem 2rem;
-  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.055);
-  transition: all 0.2s ease-in-out;
+  margin: -0.8rem 0 0.4rem 2rem;
+  transition: all 0.3s ease-in-out;
 }
 
 .open {
+  position: relative;
   opacity: 1;
-  margin-top: 0;
-  transition: all 0.5s ease-in-out;
+  margin-top: 0.6rem;
+  transition: all 0.3s ease-in-out;
+}
+
+/* THIS IS THE STYLES FOR THE GAUGE */
+.gauge-holder {
+  position: absolute;
+  right: 0;
+  top: 6rem;
+  background: white;
+  z-index: 4;
+  padding: 0 3.5rem 0 0;
+}
+
+/* RESPONSIVE STYLES FOR CALCULATOR */
+@media only screen and (max-width: 425px) {
+  /* THE STYLES FOR THE TITLE */
+  .calculator .calc-title {
+    font-size: 2.4rem;
+    z-index: 1;
+    position: relative;
+    right: 0;
+    top: 0;
+    margin-bottom: 4rem;
+    text-align: center;
+  }
+  /* 	THE STYLES FOR THE CALCULATOR BODY */
+  .calculator {
+    padding: 1rem;
+    margin: 2rem auto 0 auto;
+  }
+
+  /* 	THE STYLES FOR THE INPUT FIELDS */
+  .calculator .input-field-holder {
+    width: auto;
+  }
+
+  .calculator .input-field-holder .input-field {
+    width: auto;
+  }
+
+  .info-box {
+    position: absolute;
+    padding: 0;
+    font-size: 1.2rem;
+    margin: -5rem 2rem 0.4rem 2rem;
+  }
+
+  .open {
+    position: relative;
+    opacity: 1;
+    margin-top: 1rem;
+    transition: all 0.5s ease-in-out;
+  }
+
+  /* THE GENERATED VALUES STYLES */
+  .calculator .calculation-grid {
+    width: 100%;
+    height: auto;
+    grid-template-columns: 4rem auto;
+    grid-template-rows: auto auto;
+    margin-bottom: 1rem;
+  }
+
+  .value-holder {
+    grid-column: span 2;
+  }
+
+  .calculator .calculation-grid .calc-values {
+    font-size: 1.8rem;
+    text-align: center;
+    float: none;
+    width: 10rem;
+    margin: 0 auto;
+  }
 }
